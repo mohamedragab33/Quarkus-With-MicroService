@@ -1,0 +1,33 @@
+[
+  {
+    "id": "1",
+    "name": "Phone",
+    "price": 699.99,
+    "description": "Latest model smartphone"
+  },
+  {
+    "id": "2",
+    "name": "Laptop",
+    "price": 1299.99,
+    "description": "High-performance laptop for gaming and work"
+  },
+  {
+    "id": "3",
+    "name": "Tablet",
+    "price": 499.99,
+    "description": "Lightweight tablet with a long-lasting battery"
+  } ,
+    {
+        "id": "4",
+        "name": "Smartwatch",
+        "price": 299.99,
+        "description": "Smartwatch with heart rate monitor"
+    }
+  ,
+    {
+        "id": "5",
+        "name": "Headphones",
+        "price": 99.99,
+        "description": "Wireless headphones with noise-cancelling"
+    }
+]
