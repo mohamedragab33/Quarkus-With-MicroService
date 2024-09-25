@@ -11,6 +11,7 @@ import org.assignment.model.Product;
 import org.assignment.utils.ProductUtils;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +24,7 @@ public class ProductService {
 
     @PostConstruct
     public void init() {
-        productStore = new ConcurrentHashMap<>(ProductUtils.loadProductsFromJson());
+        productStore = new HashMap<>(ProductUtils.loadProductsFromJson());
     }
 
     public Uni<ProductResponse> getProductWithDelay(String id) {

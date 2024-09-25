@@ -38,10 +38,9 @@ public class ProductResource {
     }
 
     @POST
-    @Path("/error")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Uni<ProductResponse> simulateError() {
-        return Uni.createFrom().failure(() -> new ProductNotFoundException(SIMULATED_PRODUCT_NOT_FOUND_ERROR));
+    @Path("/throw")
+    public Uni<Void> throwException() {
+        return Uni.createFrom().failure(new ProductNotFoundException(SIMULATED_PRODUCT_NOT_FOUND_ERROR));
     }
 
 }

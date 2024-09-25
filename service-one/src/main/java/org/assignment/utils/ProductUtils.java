@@ -8,6 +8,7 @@ import org.assignment.model.Product;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +24,7 @@ public class ProductUtils {
 
     public static Map<String, Product> loadProductsFromJson() {
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Product> productStore = new ConcurrentHashMap<>();
+        Map<String, Product> productStore = new HashMap<>();
 
         try (InputStream is = ProductUtils.class.getClassLoader().getResourceAsStream("products.json")) {
             if (is != null) {
