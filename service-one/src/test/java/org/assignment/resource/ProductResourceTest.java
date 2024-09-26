@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     @Test
     void testSimulateError() {
         given()
-                .when().post("/products/error")
+                .when().post("/products/throw")
                 .then()
                 .statusCode(404)
                 .body("errorCode", is("404"),
