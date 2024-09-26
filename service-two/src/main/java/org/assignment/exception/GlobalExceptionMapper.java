@@ -19,8 +19,14 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
                     .entity(new ErrorResponse("400", exception.getMessage()))
                     .build();
         }
+        if (exception instanceof ProductCreationException) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new ErrorResponse("400", exception.getMessage()))
+                    .build();
+        }
+
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity(new ErrorResponse("500", exception.getMessage()))
+                .entity(new ErrorResponse("500", "An unexpected error occurred. Please try again later."))
                 .build();
     }
 }

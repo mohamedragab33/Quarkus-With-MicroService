@@ -25,12 +25,8 @@ public class ConsumerService {
     public Uni<ProductResponse> getProduct(String id) {
         logger.info("ConsumerService.getProduct() called");
         return productServiceClient.getProductWithDelay(id)
-                .onItem().invoke(productResponse -> {
-                    logger.info("Product response received: " + productResponse);
-                })
-                .onFailure().invoke(throwable -> {
-                    logger.severe("Failed to retrieve product: " + throwable.getMessage());
-                });
+                .onItem().invoke(productResponse -> logger.info("Product response received: " + productResponse))
+                .onFailure().invoke(throwable -> logger.severe("Failed to retrieve product: " + throwable.getMessage()));
     }
 
     @CircuitBreaker
@@ -46,13 +42,13 @@ public class ConsumerService {
     public Uni<Void> throwException() {
         logger.info("ConsumerService.throwException() called");
         return productServiceClient.throwException()
-                .onFailure().invoke(throwable -> {
+                .onFailure().transform(throwable -> {
                     if (throwable instanceof ProductNotFoundException) {
                         logger.severe("Product not found: " + throwable.getMessage());
-                        throw new ProductNotFoundException("Error simulating successful");
+                        return new ProductNotFoundException("Simulated Product Not Found Exception");
                     } else {
                         logger.severe("Failed to throw exception: " + throwable.getMessage());
-                        throw new RuntimeException("Failed to throw exception");
+                        return new RuntimeException("Simulated exception occurred");
                     }
                 });
     }
