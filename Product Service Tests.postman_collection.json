@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "887ecec4-e6b3-42cb-8d60-c533bb974257",
+		"name": "Product Service Tests",
+		"description": "Collection of tests for the Consumer Service interacting with the Product Service.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37049969"
+	},
+	"item": [
+		{
+			"name": "Get Product by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/consumer/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"consumer",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"New Product\",\n    \"description\": \"This is a new product.\",\n    \"price\": 19.99,\n    \"stock\": 50\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/consumer/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"consumer",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simulate Error Response",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/consumer/products/error",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"consumer",
+						"products",
+						"error"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
