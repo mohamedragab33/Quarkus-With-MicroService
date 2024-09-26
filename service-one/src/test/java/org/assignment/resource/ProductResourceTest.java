@@ -7,16 +7,15 @@ import org.assignment.dto.ProductResponse;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.assignment.constant.ErrorMessages.Error.SIMULATED_PRODUCT_NOT_FOUND_ERROR;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
  class ProductResourceTest {
 
     @Test
      void testGetProductWithDelay_Success() {
-        // Test for an existing product with id "1"
         given()
                 .when().get("/products/1")
                 .then()
@@ -49,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.*;
     }
 
     @Test
-    public void testSimulateError() {
+    void testSimulateError() {
         given()
                 .when().post("/products/error")
                 .then()

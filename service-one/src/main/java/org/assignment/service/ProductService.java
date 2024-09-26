@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.assignment.dto.ProductRequest;
 import org.assignment.dto.ProductResponse;
+import org.assignment.exception.ProductCreationException;
 import org.assignment.exception.ProductNotFoundException;
 import org.assignment.mapper.ProductMapper;
 import org.assignment.model.Product;
@@ -14,7 +15,6 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 @ApplicationScoped
 public class ProductService {
@@ -38,12 +38,17 @@ public class ProductService {
     }
 
     public Uni<ProductResponse> createProduct(ProductRequest productRequest) {
-        Product product = ProductMapper.INSTANCE.toProduct(productRequest);
-        product.setId(UUID.randomUUID().toString());
-        productStore.put(product.getId(), product);
+        try {
+            Product product = ProductMapper.INSTANCE.toProduct(productRequest);
+            product.setId(UUID.randomUUID().toString());
+            productStore.put(product.getId(), product);
 
-        logger.info(() -> "Product created: " + product);
+            logger.info(() -> "Product created: " + product);
 
-        return Uni.createFrom().item(ProductMapper.INSTANCE.toProductResponse(product));
+            return Uni.createFrom().item(ProductMapper.INSTANCE.toProductResponse(product));
+        }catch (ProductCreationException e){
+            throw new ProductCreationException("Failed to create product");
+        }
+
     }
 }
