@@ -25,8 +25,8 @@ The project consists of the following modules:
 To clone the project, run the following command:
 
 ```bash
-git clone [<your-git-repo-url>](https://github.com/mohamedragab33/Quarkus-With-MicroService.git)
-cd <project-directory>
+git clone [<https://github.com/mohamedragab33/Quarkus-With-MicroService.git>]
+
 
 ## Run services
 you can run these two service with mvn but you should Go to DTO module and type 
