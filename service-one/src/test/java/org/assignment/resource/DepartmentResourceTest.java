@@ -20,12 +20,12 @@ class DepartmentResourceTest {
 
  @BeforeEach
  public void setUp() {
-  departmentId = createDepartment("Finance");
+  departmentId = createDepartment();
  }
 
- private String createDepartment(String name) {
+ private String createDepartment() {
   DepartmentReq departmentReq = new DepartmentReq();
-  departmentReq.setName(name);
+  departmentReq.setName("Finance");
 
   return given()
           .contentType(ContentType.JSON)
@@ -33,7 +33,7 @@ class DepartmentResourceTest {
           .when().post("/departments")
           .then()
           .statusCode(200)
-          .body("name", equalTo(name))
+          .body("name", equalTo("Finance"))
           .extract().path("id");
  }
 
