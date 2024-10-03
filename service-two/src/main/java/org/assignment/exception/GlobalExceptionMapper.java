@@ -26,7 +26,7 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
         }
 
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity(new ErrorResponse("500", "An unexpected error occurred. Please try again later."))
+                .entity(new ErrorResponse("500", "An unexpected error occurred. Please try again later." + exception.getMessage()))
                 .build();
     }
 }

@@ -20,7 +20,7 @@ public class DepartmentService {
     @Inject
     DepartmentRepository departmentRepository;
 
-    private final EntityMapper mapper = EntityMapper.INSTANCE;
+    private static final EntityMapper mapper = EntityMapper.INSTANCE;
 
     public Uni<DepartmentRes> createDepartment(DepartmentReq departmentReq) {
         Department department = mapper.toDepartment(departmentReq);
@@ -28,29 +28,35 @@ public class DepartmentService {
                 .onItem().transform(mapper::toDepartmentRes);
     }
 
-    public Uni<DepartmentRes> getDepartmentById(ObjectId id) {
-        return departmentRepository.findById(id)
+    public Uni<DepartmentRes> getDepartmentById(String id) {
+        ObjectId objectId = mapper.stringToObjectId(id);
+        return departmentRepository.findById(objectId)
                 .onItem().ifNull().failWith(new DepartmentNotFoundException("Department with ID " + id + " not found"))
                 .onItem().transform(mapper::toDepartmentRes);
     }
 
     public Uni<List<DepartmentRes>> getAllDepartments() {
         return departmentRepository.listAll()
-.onItem().transform(departments -> departments.stream().map(mapper::toDepartmentRes).collect(Collectors.toList()));    }
+                .onItem().transform(departments -> departments.stream()
+                        .map(mapper::toDepartmentRes)
+                        .collect(Collectors.toList()));
+    }
 
-    public Uni<DepartmentRes> updateDepartment(ObjectId id, DepartmentReq departmentReq) {
-        return departmentRepository.findById(id)
+    public Uni<DepartmentRes> updateDepartment(String id, DepartmentReq departmentReq) {
+        ObjectId objectId = mapper.stringToObjectId(id);
+        return departmentRepository.findById(objectId)
                 .onItem().ifNull().failWith(new DepartmentNotFoundException("Department with ID " + id + " not found"))
                 .onItem().ifNotNull().transformToUni(existingDepartment -> {
-                    existingDepartment.name = departmentReq.getName();
+                    existingDepartment.setName(departmentReq.getName());
                     return departmentRepository.update(existingDepartment)
                             .onItem().transform(mapper::toDepartmentRes);
                 });
     }
 
-    public Uni<Boolean> deleteDepartment(ObjectId id) {
-        return departmentRepository.findById(id)
+    public Uni<Boolean> deleteDepartment(String id) {
+        ObjectId objectId = mapper.stringToObjectId(id);
+        return departmentRepository.findById(objectId)
                 .onItem().ifNull().failWith(new DepartmentNotFoundException("Department with ID " + id + " not found"))
-                .onItem().ifNotNull().transformToUni(existingDepartment -> departmentRepository.deleteById(id));
+                .onItem().ifNotNull().transformToUni(existingDepartment -> departmentRepository.deleteById(objectId));
     }
 }

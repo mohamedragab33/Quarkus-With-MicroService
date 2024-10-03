@@ -15,6 +15,7 @@
         <quarkus.platform.version>3.2.12.Final</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0</surefire-plugin.version>
+        <org.assignment.version>1.0.2-SNAPSHOT</org.assignment.version>
     </properties>
 
     <dependencyManagement>
@@ -104,23 +105,21 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-client-reactive</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.smallrye</groupId>
             <artifactId>smallrye-fault-tolerance</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.assignment</groupId>
+            <artifactId>common-dtos</artifactId>
+            <version>${org.assignment.version}</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

@@ -47,5 +47,4 @@ public class DepartmentResource {
     public Uni<Boolean> deleteDepartment(@PathParam("id") String id) {
         return departmentService.deleteDepartment(id);
     }
-
 }

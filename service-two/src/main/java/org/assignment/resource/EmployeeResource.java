@@ -1,5 +1,6 @@
 package org.assignment.resource;
 
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @Path("/employees")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Blocking
 public class EmployeeResource {
 
     @Inject
