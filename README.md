@@ -1,4 +1,4 @@
-# Quarkus Microservices Project - Part 2
+# Quarkus Microservices Project
 
 This project contains two microservices: `service-one` and `service-two`. `Service-two` communicates with `service-one` to perform CRUD operations on `Department` and `Employee` entities. The project also integrates MongoDB, implements reactive CRUD operations, fault tolerance, exception handling, and testing.
 
