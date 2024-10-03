@@ -11,4 +11,8 @@ public class Employee extends ReactivePanacheMongoEntity {
     private String name;
     private String position;
     private ObjectId departmentId;
+
+    public  void setId(ObjectId id) {
+        this.id = id;
+    }
 }
